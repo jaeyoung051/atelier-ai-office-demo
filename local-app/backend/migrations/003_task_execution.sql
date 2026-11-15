@@ -1,0 +1,4 @@
+ALTER TABLE tasks ADD COLUMN provider TEXT NOT NULL DEFAULT 'unconfigured';
+ALTER TABLE tasks ADD COLUMN model TEXT NOT NULL DEFAULT 'unconfigured';
+ALTER TABLE tasks ADD COLUMN prompt_snapshot TEXT NOT NULL DEFAULT '';
+ALTER TABLE tasks ADD COLUMN error_code TEXT;

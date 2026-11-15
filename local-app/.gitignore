@@ -1,0 +1,11 @@
+data/
+backups/
+restores/
+.runtime/
+node_modules/
+*.sqlite*
+.env
+.env.*
+!.env.example
+local-data.json
+*.zip
