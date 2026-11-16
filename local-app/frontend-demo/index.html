@@ -72,7 +72,7 @@
             <div class="section-card command-card" id="command-card"><div class="command-top"><span class="command-star">✳</span><div><div class="head-kicker">YOUR WORKSPACE</div><h2>새 업무 지시</h2></div></div><p class="command-help">저장된 역할과 업무기준으로 Gemini가 초안을 작성합니다. 내용을 검토한 뒤 승인하거나 반려하세요.</p>
               <form id="task-form">
                 <label for="project-select">고객 / 현장</label><select id="project-select"></select>
-                <label for="assignee-select">담당 부서</label><select id="assignee-select"><option value="auto">✳ 업무 내용으로 담당 추천</option><option value="customer">고객관리팀장</option><option value="field">현장관리팀장</option><option value="design">디자인·마케팅팀장</option></select>
+                <label for="task-kind">업무 유형</label><select id="task-kind"><option value="auto">자동 분류 (제안서 키워드 포함 시 제안서)</option><option value="general">일반 업무</option><option value="proposal">제안서 작업</option></select><label for="task-title">업무명 (선택)</label><input id="task-title" maxlength="100" placeholder="예) 주방 리뉴얼 제안서"><label for="assignee-select">담당 부서</label><select id="assignee-select"><option value="auto">✳ 업무 내용으로 담당 추천</option><option value="customer">고객관리팀장</option><option value="field">현장관리팀장</option><option value="design">디자인·마케팅팀장</option></select>
                 <label for="task-input">업무 내용</label><textarea id="task-input" rows="5" placeholder="예) 이번 주 시공 일정에 맞춰 고객님께 보낼 안내문을 작성해 줘." required maxlength="1000"></textarea>
                 <div class="examples"><span>빠른 예시</span><button type="button" class="example-chip" data-example="고객님에게 보낼 공사 시작 전 안내문을 작성해 줘.">고객 안내문</button><button type="button" class="example-chip" data-example="욕실 리모델링 현장 공정 체크리스트를 만들어 줘.">현장 체크리스트</button></div>
                 <button type="submit" class="submit-btn" id="submit-task">업무 전달하기 <span>↗</span></button>
@@ -84,8 +84,8 @@
       </section>
 
       <section class="page secondary-page" id="page-marketing">
-        <div class="simple-heading"><div class="eyebrow">GROWTH & PORTFOLIO</div><h1>시공 사례가 다음 고객을 데려오도록.</h1><p>완공 정보를 한 번 입력하고, 채널별 콘텐츠와 유사 사례 제안서 초안을 만들어 보세요.</p></div>
-        <div class="callout"><span>✳</span><p><b>사례 기반 원고 작성</b> · 사례를 SQLite에 저장하고 Gemini가 인스타그램·블로그·Threads 원고를 작성합니다. 업무 보드에서 묶음 검토·승인하며 자동 게시하지 않습니다.</p></div>
+        <div class="simple-heading"><div class="eyebrow">GROWTH & PORTFOLIO</div><h1>시공 사례가 다음 고객을 데려오도록.</h1><p>시공 사례로 채널별 콘텐츠를 만들고, 지시한 제안서를 한곳에서 관리하세요.</p></div>
+        <div class="callout"><span>✳</span><p><b>사례 기반 원고 작성</b> · 사례를 SQLite에 저장하고 Gemini가 인스타그램·블로그·Threads 원고를 작성합니다. 업무 보드에서 채널별로 검토·승인하며 자동 게시하지 않습니다.</p></div>
         <div class="feature-two-column">
           <div class="feature-panel"><div class="feature-panel-top"><span class="feature-tag">01 / 사례 등록</span><h2>완공 포트폴리오 등록</h2><p>평형, 공사 항목, 자재 스펙, 특징을 입력하세요.</p></div>
             <form id="portfolio-form" class="feature-form">
@@ -100,7 +100,7 @@
           </div>
           <div class="feature-panel"><div class="feature-panel-top"><span class="feature-tag">02 / 채널별 콘텐츠</span><h2>인스타 · 블로그 · Threads</h2><p>등록된 포트폴리오를 선택해서 생성된 초안을 확인하세요.</p></div><div id="marketing-drafts" class="feature-results"><div class="feature-empty">왼쪽에 완공 사례를 등록하면<br>3개 채널의 홍보 문안이 여기에 생성됩니다.</div></div></div>
         </div>
-        <div class="feature-panel feature-wide"><div class="feature-panel-top"><span class="feature-tag">03 / 고객 제안 자동화</span><h2>새 고객과 비슷한 시공 사례 찾기</h2><p>평형과 원하는 공사 품목을 입력하면 저장된 사례 중 유사한 것을 검색합니다.</p></div><div class="match-row"><label>고객 평형<input id="match-area" type="number" min="1" value="31"></label><label>원하는 공사 품목<input id="match-tags" placeholder="예) 주방, 욕실, 바닥" value="주방, 욕실"></label><button class="primary-btn" id="find-matches">유사 사례 추천 ↗</button></div><div id="match-results" class="match-results"><div class="feature-empty">사례를 등록하고 유사 사례 추천을 눌러보세요.</div></div></div>
+        <div class="feature-panel feature-wide"><div class="feature-panel-top"><span class="feature-tag">03 / 제안서 작업함</span><h2>지시한 제안서를 한곳에서.</h2><p>고객·현장별로 제안서 지시와 결과 원고, 검토 상태를 확인하세요.</p></div><div id="proposal-inbox"></div></div>
       </section>
 
       <section class="page secondary-page" id="page-schedule">
@@ -112,7 +112,7 @@
       </section>
 
       <section class="page secondary-page" id="page-tasks"><div class="simple-heading"><div class="eyebrow">WORK BOARD</div><h1>업무 보드</h1><p>업무가 어디까지 진행됐는지 확인하고 최종 결과를 승인하세요.</p></div><div class="panel-head"><div class="filter-row"><button class="filter-chip active" data-filter="all">전체</button><button class="filter-chip" data-filter="working">진행 중</button><button class="filter-chip" data-filter="review">검토 필요</button><button class="filter-chip" data-filter="done">완료</button><button class="filter-chip" data-filter="rejected">반려</button></div><button class="primary-btn" data-go="dashboard">＋ 업무 지시</button></div><div id="task-board" class="board-list"></div></section>
-      <section class="page secondary-page" id="page-projects"><div class="simple-heading"><div class="eyebrow">CLIENT & PROJECTS</div><h1>고객 · 현장 관리</h1><p>현장별 업무 이력을 분리해 관리합니다. 이 버전의 데이터는 브라우저에만 저장돼요.</p></div><div class="panel-head"><span class="section-intro">고객별 프로젝트</span><button class="primary-btn" id="add-project">＋ 현장 추가</button></div><div id="project-grid" class="project-grid"></div></section>
+      <section class="page secondary-page" id="page-projects"><div class="simple-heading"><div class="eyebrow">CLIENT & PROJECTS</div><h1>고객 · 현장 관리</h1><p>영업중 · 계약완료 · 공사진행·완료 세 그룹으로 관리합니다. 진행 상태는 SQLite에 저장됩니다.</p></div><div class="panel-head"><span class="section-intro">고객별 프로젝트</span><button class="primary-btn" id="add-project">＋ 현장 추가</button></div><div id="project-grid" class="project-grid"></div></section>
       <section class="page secondary-page" id="page-employees"><div class="simple-heading"><div class="eyebrow">YOUR AI TEAM</div><h1>AI 직원 관리</h1><p>직원별 역할 지시서와 사용할 AI 모델을 설정할 수 있습니다.</p></div><div class="callout"><span>ⓘ</span><p><b>모델 설정은 아직 시연 단계예요.</b> 실제 Claude Pro · ChatGPT · Gemini 계정과 연결되지 않았으며, 모델을 선택해도 요금이나 토큰이 발생하지 않습니다.</p></div><div id="employee-grid" class="employee-grid"></div></section>
       <section class="page secondary-page" id="page-history"><div class="simple-heading"><div class="eyebrow">ACTIVITY LOG</div><h1>활동 기록</h1><p>업무 지시부터 승인까지 실행 이벤트를 시간순으로 확인하세요.</p></div><div id="history-timeline" class="history-timeline"></div></section>
     </main>
@@ -125,6 +125,10 @@
   <script src="./live.js"></script>
   <script src="./marketing.js"></script>
   <script src="./channels.js"></script>
+  <script src="./feedback.js"></script>
+  <script src="./operations.js"></script>
+  <script src="./order-dashboard.js"></script>
+  <script src="./proposal-automation.js"></script>
 <script>document.querySelector('.sidebar nav, nav')?.insertAdjacentHTML('beforeend','<a href="/database" style="display:block;padding:12px;color:inherit">▤ DB 저장 확인</a><a href="/maintenance" style="display:block;padding:12px;color:inherit">백업·복원</a>');</script>
 </body>
 </html>
