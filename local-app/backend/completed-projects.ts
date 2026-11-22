@@ -1,0 +1,4 @@
+import type {DatabaseSync} from 'node:sqlite';
+import {listPortfolios} from './portfolios.ts';
+export function completedProjects(db:DatabaseSync){return db.prepare(`SELECT p.id,p.name,p.site_summary,p.updated_at,count(f.id) portfolio_count FROM projects p JOIN portfolios f ON f.project_id=p.id WHERE p.lifecycle_stage='completed' AND p.status!='archived' GROUP BY p.id ORDER BY p.updated_at DESC,p.id`).all();}
+export function completedProject(db:DatabaseSync,id:string){const project=completedProjects(db).find(p=>p.id===id);if(!project)throw Error('PROJECT_NOT_FOUND');return {project,portfolios:listPortfolios(db).filter(p=>p.project_id===id),documents:db.prepare('SELECT * FROM operation_documents WHERE project_id=? ORDER BY created_at DESC,id').all(id).map((d:any)=>({...d,body:JSON.parse(d.body_json),reviews:db.prepare('SELECT revision,decision,comment,created_at FROM operation_reviews WHERE document_id=? ORDER BY created_at,id').all(d.id)}))};}

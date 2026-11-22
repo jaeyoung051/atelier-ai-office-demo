@@ -10,6 +10,7 @@ if(command==='stop'){
  if(!res?.ok)throw Error('서버 종료를 확인하지 못했습니다. 실행 터미널에서 Ctrl+C를 누르세요.');for(let i=0;i<50&&existsSync(runtime);i++)await sleep(100);if(existsSync(runtime))throw Error('서버 종료 대기 시간이 초과되었습니다.');console.log('Pixffice를 종료했습니다.');
 }else{
  const version=process.versions.node.split('.').map(Number);if(version[0]!==22||version[1]<20)throw Error('Node.js 22.20.x가 필요합니다.');
+ if(!existsSync(resolve(root,'node_modules/exceljs'))||!existsSync(resolve(root,'node_modules/pptxgenjs')))throw Error('최초 실행 전 앱 폴더에서 npm ci를 실행해 엑셀·PPT 구성요소를 설치하세요.');
  const port=Number(process.env.PIXFFICE_PORT||4313),url=`http://127.0.0.1:${port}`;
  const health=await fetch(url+'/api/health',{signal:AbortSignal.timeout(1000)}).catch(()=>null);
  if(health?.ok){console.log('이미 실행 중입니다:',url);process.exit(0);}

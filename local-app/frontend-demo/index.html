@@ -112,7 +112,7 @@
       </section>
 
       <section class="page secondary-page" id="page-tasks"><div class="simple-heading"><div class="eyebrow">WORK BOARD</div><h1>업무 보드</h1><p>업무가 어디까지 진행됐는지 확인하고 최종 결과를 승인하세요.</p></div><div class="panel-head"><div class="filter-row"><button class="filter-chip active" data-filter="all">전체</button><button class="filter-chip" data-filter="working">진행 중</button><button class="filter-chip" data-filter="review">검토 필요</button><button class="filter-chip" data-filter="done">완료</button><button class="filter-chip" data-filter="rejected">반려</button></div><button class="primary-btn" data-go="dashboard">＋ 업무 지시</button></div><div id="task-board" class="board-list"></div></section>
-      <section class="page secondary-page" id="page-projects"><div class="simple-heading"><div class="eyebrow">CLIENT & PROJECTS</div><h1>고객 · 현장 관리</h1><p>영업중 · 계약완료 · 공사진행·완료 세 그룹으로 관리합니다. 진행 상태는 SQLite에 저장됩니다.</p></div><div class="panel-head"><span class="section-intro">고객별 프로젝트</span><button class="primary-btn" id="add-project">＋ 현장 추가</button></div><div id="project-grid" class="project-grid"></div></section>
+      <section class="page secondary-page" id="page-projects"><div class="simple-heading"><div class="eyebrow">CLIENT & PROJECTS</div><h1>고객 · 현장 관리</h1><p>영업중 · 계약완료 · 공사진행으로 관리합니다. 완공 포트폴리오 프롬프트 생성 완료 현장은 위 ‘완료된 현장’에서 확인하세요.</p></div><div class="panel-head"><span class="section-intro">고객별 프로젝트</span><button class="primary-btn" id="add-project">＋ 현장 추가</button></div><div id="project-grid" class="project-grid"></div></section>
       <section class="page secondary-page" id="page-employees"><div class="simple-heading"><div class="eyebrow">YOUR AI TEAM</div><h1>AI 직원 관리</h1><p>직원별 역할 지시서와 사용할 AI 모델을 설정할 수 있습니다.</p></div><div class="callout"><span>ⓘ</span><p><b>모델 설정은 아직 시연 단계예요.</b> 실제 Claude Pro · ChatGPT · Gemini 계정과 연결되지 않았으며, 모델을 선택해도 요금이나 토큰이 발생하지 않습니다.</p></div><div id="employee-grid" class="employee-grid"></div></section>
       <section class="page secondary-page" id="page-history"><div class="simple-heading"><div class="eyebrow">ACTIVITY LOG</div><h1>활동 기록</h1><p>업무 지시부터 승인까지 실행 이벤트를 시간순으로 확인하세요.</p></div><div id="history-timeline" class="history-timeline"></div></section>
     </main>
@@ -127,8 +127,13 @@
   <script src="./channels.js"></script>
   <script src="./feedback.js"></script>
   <script src="./operations.js"></script>
+  <script src="./completed-projects.js"></script>
+  <script src="./calendars.js"></script>
+  <script src="./project-workspace.js"></script>
   <script src="./order-dashboard.js"></script>
   <script src="./proposal-automation.js"></script>
+  <script src="./ppt-prompts.js"></script>
+  <script src="./customer-completed.js"></script>
 <script>document.querySelector('.sidebar nav, nav')?.insertAdjacentHTML('beforeend','<a href="/database" style="display:block;padding:12px;color:inherit">▤ DB 저장 확인</a><a href="/maintenance" style="display:block;padding:12px;color:inherit">백업·복원</a>');</script>
 </body>
 </html>

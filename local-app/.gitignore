@@ -9,3 +9,10 @@ restores/
 local-data.json
 
 !.env.example
+
+publishing-check/
+/*.zip
+/*.xlsx
+/*.pptx
+/*.jpg
+/*.png

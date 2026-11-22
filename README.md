@@ -1,7 +1,17 @@
 # Atelier AI Office / Pixffice
 
-- 루트의 HTML/JS/CSS: 기존 공개 UI 데모
-- [local-app](local-app/): 로컬 SQLite + Gemini 마케팅 MVP 2 소스
-- [MVP 2 기능 현황과 전달 가이드](docs/MVP2-guide.pdf)
+루트 HTML/JS/CSS는 기존 공개 UI 데모이고, 실제 저장·AI·현장 업무 기능은 [local-app](local-app/)의 개인 PC용 앱입니다. 공개 데모에는 고객 DB를 연결하지 않습니다.
 
-로컬 앱은 `cd local-app` 후 해당 README를 따라 실행하세요. 공개 데모는 그대로 유지합니다. 계정 키, DB, 실제 사진, 데이터 백업 ZIP은 이 저장소에 포함하지 않습니다.
+## 로컬 실행
+
+Node.js 22.20.x 설치 후 `cd local-app`, `npm ci`, `npm run app:start`를 실행하고 http://127.0.0.1:4313 을 엽니다. 종료는 `npm run app:stop`입니다. API 키는 `.env.example`을 참고해 해당 PC의 `.env`에만 입력하세요.
+
+## 2026-11-22 반영
+
+견적 엑셀 → 달력형 공정표·발주 일정 참고표 → 편집 가능한 PPT, 현장별 자료·승인 기록, 진행 전/진행 중 좌우 분리, 완료 현장 목록, 노션 연동용 월별 캘린더, Claude PPT 프롬프트 사전 분석을 추가했습니다. 기존 마케팅·견적·공정·발주·제안서 원고·백업/복원 기능을 포함합니다.
+
+[최신 상세 안내](local-app/견적엑셀_현장일정_PPT_사용안내.md) · [노션 연결 설정](local-app/노션_캘린더_연동안내.md)
+
+자동 테스트 36개 통과. 실제 노션 인증, SNS 자동 게시, 고객 제안서 전체 자동 PPT 제작, 친구 PC와 Windows 검증은 남아 있습니다.
+
+API 키, 실행 DB, 원본 사진·견적, 백업 ZIP, 로컬 실행 설정은 이 저장소에 포함하지 않습니다. 처음 실행하면 새 로컬 DB와 더미 직원·업무기준·가상 단가가 생성됩니다.

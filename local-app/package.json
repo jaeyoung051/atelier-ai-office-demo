@@ -14,5 +14,14 @@
     "restore:full": "node --env-file-if-exists=.env --experimental-strip-types backend/backup-cli.ts restore",
     "app:start": "node --env-file-if-exists=.env --experimental-strip-types tools/manage.ts start",
     "app:stop": "node --experimental-strip-types tools/manage.ts stop"
+  },
+  "dependencies": {
+    "exceljs": "4.4.0",
+    "jszip": "3.10.1",
+    "pptxgenjs": "4.0.1"
+  },
+  "overrides": {
+    "uuid": "11.1.1",
+    "image-size": "2.0.3"
   }
 }

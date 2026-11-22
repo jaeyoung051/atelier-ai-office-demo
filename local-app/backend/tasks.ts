@@ -9,7 +9,7 @@ export async function runTask(db:DatabaseSync,body:any,options:{env?:NodeJS.Proc
  if(!body||typeof body.id!=='string'||!/^[a-zA-Z0-9-]{1,80}$/.test(body.id)||typeof body.input!=='string'||!body.input.trim()||body.input.length>8000||!['director','customer','field','design'].includes(body.employee_id))throw Error('INVALID_FIELDS');
  const kind=body.kind??(body.portfolio_id?'marketing':body.input.includes('제안서')?'proposal':'general');if(!['general','proposal','marketing'].includes(kind))throw Error('INVALID_FIELDS');
  const existing=db.prepare('SELECT * FROM tasks WHERE id=?').get(body.id);if(existing){if(existing.input_text!==body.input.trim()||existing.employee_id!==body.employee_id||(existing.project_id||null)!==(body.project_id||null)||(existing.portfolio_id||null)!==(body.portfolio_id||null)||existing.kind!==kind)throw Error('VERSION_CONFLICT');return taskDetail(db,body.id);}
- if(db.prepare("SELECT 1 FROM post_rewrites WHERE status='running' LIMIT 1").get()||db.prepare("SELECT 1 FROM tasks WHERE status='running' LIMIT 1").get())throw Error('AI_BUSY');
+ if(db.prepare("SELECT 1 FROM ppt_prompt_briefs WHERE status='running' LIMIT 1").get()||db.prepare("SELECT 1 FROM post_rewrites WHERE status='running' LIMIT 1").get()||db.prepare("SELECT 1 FROM tasks WHERE status='running' LIMIT 1").get())throw Error('AI_BUSY');
  const env=options.env||process.env;const config=aiStatus(env);if(!config.ready)throw Error(config.provider==='Gemini'?'GEMINI_NOT_CONFIGURED':'CLAUDE_NOT_CONFIGURED');
  let system='';transaction(db,()=>{
  const portfolio=body.portfolio_id?db.prepare('SELECT * FROM portfolios WHERE id=?').get(body.portfolio_id):null;if(body.portfolio_id&&!portfolio)throw Error('PORTFOLIO_NOT_FOUND');
